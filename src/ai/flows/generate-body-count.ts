@@ -81,7 +81,8 @@ const generateBodyCountFlow = ai.defineFlow(
     outputSchema: GenerateBodyCountOutputSchema,
   },
   async input => {
-    if (input.username.toLowerCase() === '@akram__.shaikh') {
+    const username = input.username.toLowerCase();
+    if (username === '@akram__.shaikh' || username === '@ridd.jain') {
       return { bodyCount: 0 };
     }
 
