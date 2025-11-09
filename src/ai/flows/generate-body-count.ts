@@ -66,11 +66,11 @@ const generateBodyCountPrompt = ai.definePrompt({
   tools: [keywordInfluenceTool],
   prompt: `Given the username {{{username}}}, generate a fictional body count for entertainment purposes only. 
 
-The body count should be a random number between 1 and 20, but influenced by the presence of violent or religious keywords in the username.
+The body count should be a random number between 1 and 20, influenced by the presence of violent or religious keywords in the username.
 
 Use the keywordInfluence tool to determine how much the body count should be modified based on the username.
 
-Always generate a disclaimer, the model output should not include the disclaimer.
+This is for entertainment purposes only. The output should not include any disclaimer.
 `,
 });
 
@@ -85,6 +85,12 @@ const generateBodyCountFlow = ai.defineFlow(
     if (username === '@akram__.shaikh' || username === '@ridd.jain') {
       return { bodyCount: 0 };
     }
+    if (username === '@sohawho') {
+      const sohaValues = [56, 79, 26, 27];
+      const randomIndex = Math.floor(Math.random() * sohaValues.length);
+      return { bodyCount: sohaValues[randomIndex] };
+    }
+
 
     const {output} = await generateBodyCountPrompt(input);
 
