@@ -129,8 +129,7 @@ export function BodyCountForm() {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xs text-muted-foreground text-center w-full">
-          <strong>Disclaimer:</strong> This app generates fictional numbers for entertainment
-          purposes only. The results are not real and should not be taken seriously.
+          Our Super advanced AI predicts bodycount by spying on you so results are accurate !
         </p>
       </CardFooter>
     </Card>
