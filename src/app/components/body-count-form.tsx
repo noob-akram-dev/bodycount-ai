@@ -69,7 +69,7 @@ export function BodyCountForm() {
         </div>
         <CardTitle className="text-4xl font-bold font-headline italic">BodyCount AI</CardTitle>
         <CardDescription className="text-muted-foreground pt-1">
-          Curious? Enter a username to generate an original body count.
+          Their dating history: short story or epic saga? Let our AI guess.
         </CardDescription>
       </CardHeader>
       <CardContent className="p-6 min-h-[260px] flex items-center justify-center">
@@ -129,7 +129,7 @@ export function BodyCountForm() {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xs text-muted-foreground text-center w-full">
-          Disclaimer: Our super-advanced AI meticulously analyzes... *everything*... for uncanny accuracy. Use with caution.
+          Disclaimer: Our highly advanced AI has been trained on... well, let's just say it's seen things. For entertainment only.
         </p>
       </CardFooter>
     </Card>
