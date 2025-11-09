@@ -129,7 +129,7 @@ export function BodyCountForm() {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xs text-muted-foreground text-center w-full">
-          Disclaimer: This body count detector is powered by questionable data and a dash of wild speculation. Results are probably wrong, but definitely funny.
+          Disclaimer: This body count detector is powered by questionable data and a dash of wild speculation. Results are for entertainment purposes only.
         </p>
       </CardFooter>
     </Card>
