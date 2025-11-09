@@ -66,7 +66,7 @@ const generateBodyCountPrompt = ai.definePrompt({
   tools: [keywordInfluenceTool],
   prompt: `Given the username {{{username}}}, generate a fictional body count for entertainment purposes only. 
 
-The body count should be a random number, but influenced by the presence of violent or religious keywords in the username.
+The body count should be a random number between 1 and 20, but influenced by the presence of violent or religious keywords in the username.
 
 Use the keywordInfluence tool to determine how much the body count should be modified based on the username.
 
@@ -88,12 +88,20 @@ const generateBodyCountFlow = ai.defineFlow(
 
     const {output} = await generateBodyCountPrompt(input);
 
-    if (!output) {
+    if (!output || output.bodyCount < 1 || output.bodyCount > 20) {
       // Handle the case where the LLM call fails or returns no output
       const keywordInfluence = await keywordInfluenceTool(input);
-      const baseBodyCount = Math.floor(Math.random() * 100); // Base random number
+      const baseBodyCount = Math.floor(Math.random() * 20) + 1; // Base random number 1-20
       const modifiedBodyCount = baseBodyCount * keywordInfluence.violenceModifier * keywordInfluence.religionModifier;
-      return { bodyCount: Math.floor(modifiedBodyCount) };
+      
+      let finalBodyCount = Math.floor(modifiedBodyCount);
+      if (finalBodyCount > 20) {
+        finalBodyCount = 20;
+      }
+      if (finalBodyCount < 1) {
+        finalBodyCount = 1;
+      }
+      return { bodyCount: finalBodyCount };
     }
 
     return output;
