@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Heart, RefreshCw, Send } from "lucide-react";
+import { Flame, RefreshCw, Send } from "lucide-react";
 
 import { getBodyCountAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
@@ -65,9 +65,9 @@ export function BodyCountForm() {
     <Card className="w-full max-w-md mx-auto shadow-2xl rounded-3xl border-4 border-primary/20">
       <CardHeader className="text-center pt-8">
         <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-16 h-16 flex items-center justify-center mb-4">
-          <Heart className="w-8 h-8" />
+          <Flame className="w-8 h-8" />
         </div>
-        <CardTitle className="text-3xl font-bold font-headline">BodyCount AI</CardTitle>
+        <CardTitle className="text-4xl font-bold font-headline italic">BodyCount AI</CardTitle>
         <CardDescription className="text-muted-foreground pt-1">
           Curious? Enter a username to generate an original body count.
         </CardDescription>
@@ -76,7 +76,7 @@ export function BodyCountForm() {
         {bodyCount !== null ? (
           <div className="text-center space-y-4 animate-in fade-in-50 zoom-in-95 w-full">
             <p className="text-lg text-muted-foreground font-body">Original Body Count</p>
-            <p className="text-8xl font-extrabold text-primary font-headline tracking-tighter">
+            <p className="text-8xl font-black text-primary font-headline tracking-tighter">
               {bodyCount}
             </p>
             <Button
@@ -94,7 +94,7 @@ export function BodyCountForm() {
         ) : isLoading ? (
           <div className="text-center space-y-4 animate-in fade-in-50 w-full">
             <p className="text-lg text-muted-foreground font-body">Generating...</p>
-            <p className="text-8xl font-extrabold text-primary/50 animate-pulse font-headline tracking-tighter">
+            <p className="text-8xl font-black text-primary/50 animate-pulse font-headline tracking-tighter">
               ??
             </p>
             <div className="h-10 mt-6" />
