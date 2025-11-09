@@ -1,0 +1,22 @@
+
+'use server';
+
+import { generateBodyCount, type GenerateBodyCountInput } from '@/ai/flows/generate-body-count';
+
+type ActionResult = {
+  bodyCount?: number;
+  error?: string;
+};
+
+export async function getBodyCountAction(input: GenerateBodyCountInput): Promise<ActionResult> {
+  try {
+    const result = await generateBodyCount(input);
+    if (result.bodyCount !== undefined) {
+      return { bodyCount: result.bodyCount };
+    }
+    return { error: 'Failed to generate a body count.' };
+  } catch (e) {
+    console.error(e);
+    return { error: 'An unexpected error occurred. Please try again later.' };
+  }
+}
