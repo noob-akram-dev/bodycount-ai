@@ -129,7 +129,7 @@ export function BodyCountForm() {
       </CardContent>
       <CardFooter className="p-6 pt-0">
         <p className="text-xs text-muted-foreground text-center w-full">
-          Our Super advanced AI predicts bodycount by spying on you so results are accurate !
+          Disclaimer: Our all-seeing AI uses... *advanced* methods to ensure these results are uncannily accurate.
         </p>
       </CardFooter>
     </Card>
