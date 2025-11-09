@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Flame, RefreshCw, Send } from "lucide-react";
+import { Heart, RefreshCw, Send } from "lucide-react";
 
 import { getBodyCountAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
@@ -62,10 +62,10 @@ export function BodyCountForm() {
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-2xl rounded-3xl border-2 border-primary/10">
+    <Card className="w-full max-w-md mx-auto shadow-2xl rounded-3xl border-4 border-primary/20">
       <CardHeader className="text-center pt-8">
         <div className="mx-auto bg-primary text-primary-foreground rounded-full p-3 w-16 h-16 flex items-center justify-center mb-4">
-          <Flame className="w-8 h-8" />
+          <Heart className="w-8 h-8" />
         </div>
         <CardTitle className="text-3xl font-bold font-headline">BodyCount AI</CardTitle>
         <CardDescription className="text-muted-foreground pt-1">

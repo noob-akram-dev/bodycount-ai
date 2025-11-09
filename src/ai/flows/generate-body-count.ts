@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -80,16 +81,16 @@ const generateBodyCountFlow = ai.defineFlow(
     outputSchema: GenerateBodyCountOutputSchema,
   },
   async input => {
-    const keywordInfluence = await keywordInfluenceTool(input);
-
-    const baseBodyCount = Math.floor(Math.random() * 100); // Base random number
-    const modifiedBodyCount = baseBodyCount * keywordInfluence.violenceModifier * keywordInfluence.religionModifier;
-    const finalBodyCount = Math.floor(modifiedBodyCount);
-
     const {output} = await generateBodyCountPrompt(input);
 
-    return {
-      bodyCount: finalBodyCount,
-    };
+    if (!output) {
+      // Handle the case where the LLM call fails or returns no output
+      const keywordInfluence = await keywordInfluenceTool(input);
+      const baseBodyCount = Math.floor(Math.random() * 100); // Base random number
+      const modifiedBodyCount = baseBodyCount * keywordInfluence.violenceModifier * keywordInfluence.religionModifier;
+      return { bodyCount: Math.floor(modifiedBodyCount) };
+    }
+
+    return output;
   }
 );
