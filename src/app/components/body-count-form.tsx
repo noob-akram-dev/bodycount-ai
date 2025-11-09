@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 export function BodyCountForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [bodyCount, setBodyCount] = useState<number | null>(null);
+  const [result, setResult] = useState<{bodyCount: number; datingSuggestion: string} | null>(null);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,18 +46,18 @@ export function BodyCountForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    setBodyCount(null);
-    const result = await getBodyCountAction(values);
+    setResult(null);
+    const actionResult = await getBodyCountAction(values);
     setIsLoading(false);
 
-    if (result.error) {
+    if (actionResult.error) {
       toast({
         title: "Error",
-        description: result.error,
+        description: actionResult.error,
         variant: "destructive",
       });
-    } else if (result.bodyCount !== undefined) {
-      setBodyCount(result.bodyCount);
+    } else if (actionResult.bodyCount !== undefined && actionResult.datingSuggestion) {
+      setResult({bodyCount: actionResult.bodyCount, datingSuggestion: actionResult.datingSuggestion});
     }
   }
 
@@ -72,20 +72,23 @@ export function BodyCountForm() {
           Their dating history: short story or epic saga? Let our AI guess.
         </CardDescription>
       </CardHeader>
-      <CardContent className="p-6 min-h-[260px] flex items-center justify-center">
-        {bodyCount !== null ? (
+      <CardContent className="p-6 min-h-[300px] flex flex-col items-center justify-center">
+        {result ? (
           <div className="text-center space-y-4 animate-in fade-in-50 zoom-in-95 w-full">
             <p className="text-lg text-muted-foreground font-body">Original Body Count</p>
             <p className="text-8xl font-black text-primary font-headline tracking-tighter">
-              {bodyCount}
+              {result.bodyCount}
+            </p>
+            <p className="text-sm text-muted-foreground italic px-4">
+              &ldquo;{result.datingSuggestion}&rdquo;
             </p>
             <Button
               onClick={() => {
-                setBodyCount(null);
+                setResult(null);
                 form.reset();
               }}
               variant="outline"
-              className="mt-6"
+              className="mt-4"
             >
               <RefreshCw className="mr-2 h-4 w-4" />
               Try Another

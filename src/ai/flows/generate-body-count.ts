@@ -2,9 +2,9 @@
 'use server';
 
 /**
- * @fileOverview Generates a fictional body count based on a username, influenced by violent or religious keywords.
+ * @fileOverview Generates a fictional body count and a funny dating suggestion based on a username.
  *
- * - generateBodyCount - A function that generates the body count.
+ * - generateBodyCount - A function that generates the body count and suggestion.
  * - GenerateBodyCountInput - The input type for the generateBodyCount function.
  * - GenerateBodyCountOutput - The return type for the generateBodyCount function.
  */
@@ -19,6 +19,7 @@ export type GenerateBodyCountInput = z.infer<typeof GenerateBodyCountInputSchema
 
 const GenerateBodyCountOutputSchema = z.object({
   bodyCount: z.number().describe('The fictional body count generated for the username.'),
+  datingSuggestion: z.string().describe('A funny, personal suggestion on whether to date the person.'),
 });
 export type GenerateBodyCountOutput = z.infer<typeof GenerateBodyCountOutputSchema>;
 
@@ -68,6 +69,14 @@ const generateBodyCountPrompt = ai.definePrompt({
 
 The body count should be a random number between 1 and 20, influenced by the presence of violent or religious keywords in the username.
 
+After generating the body count, provide a short, funny, and personal dating suggestion based on that number.
+- For a low count (0-5), suggest they are a keeper or new to the game.
+- For a medium count (6-15), suggest they are experienced but maybe a risk.
+- For a high count (16-20), make a joke about them being a legend or a professional.
+
+Example: For a body count of 2, the suggestion could be "This one's practically brand new. Handle with care, or don't."
+Example: For a body count of 18, the suggestion could be "You've found a legend. You're not just a chapter in their book; you're a footnote."
+
 Use the keywordInfluence tool to determine how much the body count should be modified based on the username.
 
 This is for entertainment purposes only. The output should not include any disclaimer.
@@ -83,18 +92,23 @@ const generateBodyCountFlow = ai.defineFlow(
   async input => {
     const username = input.username.toLowerCase();
     if (username === '@akram__.shaikh' || username === '@ridd.jain') {
-      return { bodyCount: 0 };
+      return { bodyCount: 0, datingSuggestion: "Zero. Zilch. Nada. This one's a certified saint. Or just very, very single. Proceed with blessings." };
     }
     if (username === '@sohawho') {
       const sohaValues = [56, 79, 26, 27];
       const randomIndex = Math.floor(Math.random() * sohaValues.length);
-      return { bodyCount: sohaValues[randomIndex] };
+      const bodyCount = sohaValues[randomIndex];
+      let datingSuggestion = "You're dealing with a celestial event. This isn't a body count, it's a high score. Good luck, soldier.";
+      if (bodyCount < 30) {
+        datingSuggestion = "A modest legend. They've seen a thing or two, but there are still worlds to conquer. Maybe one of them is yours."
+      }
+      return { bodyCount, datingSuggestion };
     }
 
 
     const {output} = await generateBodyCountPrompt(input);
 
-    if (!output || output.bodyCount < 1 || output.bodyCount > 20) {
+    if (!output || !output.datingSuggestion || output.bodyCount < 1 || output.bodyCount > 20) {
       // Handle the case where the LLM call fails or returns no output
       const keywordInfluence = await keywordInfluenceTool(input);
       const baseBodyCount = Math.floor(Math.random() * 20) + 1; // Base random number 1-20
@@ -107,7 +121,17 @@ const generateBodyCountFlow = ai.defineFlow(
       if (finalBodyCount < 1) {
         finalBodyCount = 1;
       }
-      return { bodyCount: finalBodyCount };
+      
+      let datingSuggestion = "The AI is speechless. This person transcends numbers. Proceed with a mix of awe and terror.";
+       if (finalBodyCount <= 5) {
+        datingSuggestion = "This one's a keeper! Or just really good at hiding their tracks. Proceed with cautious optimism.";
+      } else if (finalBodyCount <= 15) {
+        datingSuggestion = "A seasoned veteran. They know the ropes. Expect good stories, but maybe don't introduce them to your parents just yet.";
+      } else {
+        datingSuggestion = "You've got a pro on your hands. This isn't their first rodeo. Or their tenth. Buckle up, buttercup.";
+      }
+
+      return { bodyCount: finalBodyCount, datingSuggestion };
     }
 
     return output;
