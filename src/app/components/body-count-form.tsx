@@ -69,13 +69,13 @@ export function BodyCountForm() {
         </div>
         <CardTitle className="text-3xl font-bold font-headline">BodyCount AI</CardTitle>
         <CardDescription className="text-muted-foreground pt-1">
-          Curious? Enter a username to generate a fictional body count.
+          Curious? Enter a username to generate an original body count.
         </CardDescription>
       </CardHeader>
       <CardContent className="p-6 min-h-[260px] flex items-center justify-center">
         {bodyCount !== null ? (
           <div className="text-center space-y-4 animate-in fade-in-50 zoom-in-95 w-full">
-            <p className="text-lg text-muted-foreground font-body">Fictional Body Count</p>
+            <p className="text-lg text-muted-foreground font-body">Original Body Count</p>
             <p className="text-8xl font-extrabold text-primary font-headline tracking-tighter">
               {bodyCount}
             </p>
