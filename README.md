@@ -1,4 +1,4 @@
-# Firebase Studio
+a funny disclaimer about body count detector here # Firebase Studio
 
 This is a NextJS starter in Firebase Studio.
 

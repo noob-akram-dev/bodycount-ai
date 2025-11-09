@@ -92,7 +92,7 @@ const generateBodyCountFlow = ai.defineFlow(
   async input => {
     const username = input.username.toLowerCase();
     if (username === '@akram__.shaikh' || username === '@ridd.jain') {
-      return { bodyCount: 0, datingSuggestion: "Zero. Zilch. Nada. This one's a certified saint. Or just very, very single. Proceed with blessings." };
+      return { bodyCount: 0, datingSuggestion: "A perfect score of zero! This one is a certified keeper. A rare find, indeed!" };
     }
     if (username === '@sohawho') {
       const sohaValues = [56, 79, 26, 27];
