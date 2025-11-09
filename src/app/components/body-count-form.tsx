@@ -93,7 +93,7 @@ export function BodyCountForm() {
           </div>
         ) : isLoading ? (
           <div className="text-center space-y-4 animate-in fade-in-50 w-full">
-            <p className="text-lg text-muted-foreground font-body">Generating...</p>
+            <p className="text-lg text-muted-foreground font-body">Predicting...</p>
             <p className="text-8xl font-black text-primary/50 animate-pulse font-headline tracking-tighter">
               ??
             </p>
@@ -121,7 +121,7 @@ export function BodyCountForm() {
               />
               <Button type="submit" className="w-full h-14 text-lg rounded-xl">
                 <Send className="mr-2 h-5 w-5" />
-                Generate
+                Predict
               </Button>
             </form>
           </Form>
